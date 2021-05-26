@@ -14,7 +14,6 @@
 
 	<body>
 		<div class="container-fluid" id="main"> {% block content %}{% endblock %}
-
 			</div>
 		</body>
 

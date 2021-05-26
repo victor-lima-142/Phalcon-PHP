@@ -4,9 +4,9 @@ use Phalcon\Http\Response;
 use Phalcon\Http\Request;
 use Phalcon\Mvc\Controller;
 
-class IndexController extends Controller
+class SerieController extends Controller
 {
-    public function indexAction()
+    public function listagemAction()
     {
         $series = Serie::find();
         $this->view->setVar('series', $series);
@@ -15,3 +15,5 @@ class IndexController extends Controller
 }
 
 ?>
+
+

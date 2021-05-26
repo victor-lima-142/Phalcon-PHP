@@ -3,10 +3,9 @@
 use \Phalcon\Mvc\Router;
 
 $router = new Router(true);
-// $router->removeExtraSlashes(true);
 
-$router->add("/", [
-    'controller' => 'Index', 'action' => 'index'
-]);
+$router->setDefaultController('SerieController');
 
+$router->addGet("/listar-serie", ['Controller' => 'serie', 'action' => 'listagem']);
+$router->addGet("/", ['Controller' => 'serie', 'action' => 'listagem']);
 return $router;
