@@ -6,9 +6,9 @@ return new \Phalcon\Config([
     'database' => [
         'adapter' => 'Mysql',
         'host' => '127.0.0.1',
-        'username' => 'phalcont_teste01',
-        'password' => 'Ph01al98!@#',
-        'dbname' => 'phalcont_teste01',
+        'username' => 'root',
+        'password' => '',
+        'dbname' => 'phalcon_php',
         'charset' => 'utf8',
     ],
     'application' => [
