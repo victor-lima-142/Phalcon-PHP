@@ -1,7 +1,6 @@
 <?php
 declare(strict_types=1);
 
-use Phalcon\Di\FactoryDefault;
 use Phalcon\Escaper;
 use Phalcon\Flash\Direct as Flash;
 use Phalcon\Mvc\Model\Metadata\Memory as MetaDataAdapter;
@@ -12,12 +11,11 @@ use Phalcon\Session\Adapter\Stream as SessionAdapter;
 use Phalcon\Session\Manager as SessionManager;
 use Phalcon\Url as UrlResolver;
 
-$di = new FactoryDefault();
 /**
  * Shared configuration service
  */
 $di->setShared('config', function () {
-    return include APP_PATH . "\app\config\config.php";
+    return include APP_PATH . "/config/config.php";
 });
 
 /**
@@ -54,8 +52,10 @@ $di->setShared('view', function () {
             ]);
 
             return $volt;
-        }
-        ]);
+        },
+        '.phtml' => PhpEngine::class
+
+    ]);
 
     return $view;
 });
@@ -110,3 +110,13 @@ $di->set('flash', function () {
 /**
  * Start the session the first time some component request the session service
  */
+$di->setShared('session', function () {
+    $session = new SessionManager();
+    $files = new SessionAdapter([
+        'savePath' => sys_get_temp_dir(),
+    ]);
+    $session->setAdapter($files);
+    $session->start();
+
+    return $session;
+});

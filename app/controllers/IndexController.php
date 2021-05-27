@@ -1,17 +1,18 @@
 <?php
+declare(strict_types=1);
 
-use Phalcon\Http\Response;
-use Phalcon\Http\Request;
-use Phalcon\Mvc\Controller;
-
-class IndexController extends Controller
+class IndexController extends ControllerBase
 {
+
     public function indexAction()
     {
-        $series = Serie::find();
-        $this->view->setVar('series', $series);
-        $this->view->pick('serie/listar');
-    }   
+
+    }
+
+    public function notFoundAction()
+    {
+        $this->view->pick('layouts/404');
+    }
+
 }
 
-?>

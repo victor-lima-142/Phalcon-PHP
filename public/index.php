@@ -1,41 +1,47 @@
 <?php
+declare(strict_types=1);
+
+use Phalcon\Di\FactoryDefault;
 
 error_reporting(E_ALL);
 
-define('APP_PATH', realpath('../'));
-ini_set('display_errors', 1);
-date_default_timezone_set('America/Sao_Paulo');
-
+define('BASE_PATH', dirname(__DIR__));
+define('APP_PATH', BASE_PATH . '/app');
 
 try {
-
     /**
-     * Read the configuration
+     * The FactoryDefault Dependency Injector automatically registers
+     * the services that provide a full stack framework.
      */
-    $config = include APP_PATH . "/app/config/config.php";
-
-    /**
-     * Read auto-loader
-     */
-    include APP_PATH . "/app/config/loader.php";
+    $di = new FactoryDefault();
 
     /**
      * Read services
      */
-    include APP_PATH . "/app/config/services.php";
+    include APP_PATH . '/config/services.php';
+
+    /**
+     * Handle routes
+     */
+    include APP_PATH . '/config/router.php';
+
+    /**
+     * Get config service for use in inline setup below
+     */
+    $config = $di->getConfig();
+
+    /**
+     * Include Autoloader
+     */
+    include APP_PATH . '/config/loader.php';
 
     /**
      * Handle the request
      */
     $application = new \Phalcon\Mvc\Application($di);
 
-
-    $request = new Phalcon\Http\Request();
-    echo $application->handle($_GET['_url'] ?? '/')->getContent();
+    echo $application->handle($_SERVER['REQUEST_URI'])->getContent();
 } catch (\Exception $e) {
     echo $e->getMessage() . '<br>';
-    echo $e->getFile() . '<br>';
-    echo $e->getLine() . '<br>';
-    echo "StackTracer: <br>";
-    echo $e->getTraceAsString() . '<br>';
+    echo '<pre>' . $e->getTraceAsString() . '</pre>';
 }

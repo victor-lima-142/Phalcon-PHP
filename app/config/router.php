@@ -1,11 +1,12 @@
 <?php
 
-use \Phalcon\Mvc\Router;
+$router = $di->getRouter();
 
-$router = new Router(true);
-
-$router->setDefaultController('SerieController');
-
-$router->addGet("/listar-serie", ['Controller' => 'serie', 'action' => 'listagem']);
-$router->addGet("/", ['Controller' => 'serie', 'action' => 'listagem']);
-return $router;
+// Define your routes here
+$router->add('/listar-series', 'Serie::listagem');
+$router->addPost('/nova-serie', 'Serie::create');
+$router->notFound([
+    'controller' => 'index',
+    'action' => 'notFound'
+]);
+$router->handle($_SERVER['REQUEST_URI']);
