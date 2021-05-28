@@ -6,8 +6,8 @@ use Phalcon\Paginator\Adapter\Model as Paginator;
 class Temporada extends Model
 {
     private $id;
-    private $numero_temporada;
-    private $id_serie;
+    private $numeroTemporada;
+    private $idSerie;
 
     public function getId()
     {
@@ -21,29 +21,26 @@ class Temporada extends Model
     }
 
 
-
-    
-    public function getNumero_temporada()
+    public function getNumeroTemporada()
     {
-        return $this->numero_temporada;
+        return $this->numeroTemporada;
     }
-    public function setNumero_temporada($numero_temporada)
+    
+    public function setNumeroTemporada($numeroTemporada)
     {
-        $this->numero_temporada = $numero_temporada;
+        $this->numeroTemporada = $numeroTemporada;
 
         return $this;
     }
 
-
-
     
-    public function getId_serie()
+    public function getIdSerie()
     {
-        return $this->id_serie;
+        return $this->idSerie;
     }
-    public function setId_serie($id_serie)
+    public function setIdSerie($idSerie)
     {
-        $this->id_serie = $id_serie;
+        $this->idSerie = $idSerie;
 
         return $this;
     }

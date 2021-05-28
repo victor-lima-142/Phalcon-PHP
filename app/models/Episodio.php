@@ -7,34 +7,32 @@ class Episodio extends Model
 {
     private $id;
     private $numero;
-    private $nome;
-    private $id_temporada;
+    private $assistido;
+    private $idTemporada;
 
-    public function getId_temporada()
+    public function getIdTemporada()
     {
-        return $this->id_temporada;
+        return $this->idTemporada;
     }
-    public function setId_temporada($id_temporada)
+    public function setIdTemporada($idTemporada)
     {
-        $this->id_temporada = $id_temporada;
-
+        $this->idTemporada = $idTemporada;
         return $this;
     }
 
-    
 
-    public function getNome()
+
+    public function getAssistido()
     {
-        return $this->nome;
+        return $this->assistido;
     }
-    public function setNome($nome)
+    public function setAssistido($assistido)
     {
-        $this->nome = $nome;
-
+        $this->assistido = $assistido;
         return $this;
     }
 
-    
+
 
     public function getNumero()
     {
@@ -43,7 +41,6 @@ class Episodio extends Model
     public function setNumero($numero)
     {
         $this->numero = $numero;
-
         return $this;
     }
 
@@ -56,7 +53,6 @@ class Episodio extends Model
     public function setId($id)
     {
         $this->id = $id;
-
         return $this;
     }
 }

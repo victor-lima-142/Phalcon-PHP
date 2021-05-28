@@ -7,12 +7,6 @@ use Phalcon\Mvc\Controller;
 
 class SerieController extends ControllerBase
 {
-
-    public function testeAction()
-    {
-        echo "<h1>Olá mundo</h1>";
-    }
-
     public function listagemAction()
     {
         $series = Serie::find();
@@ -31,4 +25,28 @@ class SerieController extends ControllerBase
         return $this->response->redirect('/listar-series');
     }
 
+    public function deleteAction()
+    {
+        $serie = Serie::find($this->dispatcher->getParam('id'));
+        if (!$serie->delete()) {
+            return $this->response->redirect('/');
+        } else {
+            return $this->response->redirect('/listar-series');
+        }
+    }
+
+    public function editAction()
+    {
+        $serie = Serie::findFirst($this->dispatcher->getParam('id'));
+        $serie->setNome($this->request->getPost('nome'));
+        $serie->setDescricao($this->request->getPost('descricao'));
+        $serie->setAvaliacao($this->request->getPost('avaliacao'));
+        $serie->save();
+
+        if (!$serie){
+            echo "6";
+        } else {
+            return $this->response->redirect('/listar-series');
+        }
+    }
 }
