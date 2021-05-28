@@ -10,29 +10,18 @@ class Episodio extends Model
     private $assistido;
     private $idTemporada;
 
-    public function getIdTemporada()
+    public function getId()
     {
-        return $this->idTemporada;
+        return $this->id;
     }
-    public function setIdTemporada($idTemporada)
+    public function setId($id)
     {
-        $this->idTemporada = $idTemporada;
+        $this->id = $id;
+
         return $this;
     }
 
-
-
-    public function getAssistido()
-    {
-        return $this->assistido;
-    }
-    public function setAssistido($assistido)
-    {
-        $this->assistido = $assistido;
-        return $this;
-    }
-
-
+    
 
     public function getNumero()
     {
@@ -41,18 +30,33 @@ class Episodio extends Model
     public function setNumero($numero)
     {
         $this->numero = $numero;
+
         return $this;
     }
 
     
 
-    public function getId()
+    public function getAssistido()
     {
-        return $this->id;
+        return $this->assistido;
     }
-    public function setId($id)
+    public function setAssistido($assistido)
     {
-        $this->id = $id;
+        $this->assistido = $assistido;
+
+        return $this;
+    }
+
+    
+    
+    public function getIdTemporada()
+    {
+        return $this->idTemporada;
+    }
+    public function setIdTemporada($idTemporada)
+    {
+        $this->idTemporada = $idTemporada;
+
         return $this;
     }
 }

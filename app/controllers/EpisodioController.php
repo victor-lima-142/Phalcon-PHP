@@ -9,14 +9,15 @@ class EpisodioController extends ControllerBase
 {
     public function assisteAction()
     {
-        $episodio = Episodio::find($this->dispatcher->getParam('id'));
-        var_dump($episodio->assistido);
-        die;
-        if ($episodio->assistido == 0) {
-            $episodio->assistido == 1;
+        $episodio = Episodio::find($this->dispatcher->getParam('id'))->getLast();
+        if (intval($episodio->assistido) == 0) {
+            $episodio->assistido = 1;
+            $episodio->save();
             return $this->response->redirect($this->request->getHTTPReferer());
-        } else if ($episodio->assistido == 1) {
-            $episodio->assistido == 0;
+        } else if (intval($episodio->assistido) == 1) {
+            $episodio->assistido = 0;
+            $episodio->save();
+            
             return $this->response->redirect($this->request->getHTTPReferer());
         }
     }   
@@ -27,7 +28,7 @@ class EpisodioController extends ControllerBase
         $ultimoepisodio = $episodios->getLast();
         $novoepisodio = new episodio();
         $novoepisodio->numero = $ultimoepisodio->numero + 1;
-        $novoepisodio->assistido = 0;
+        $novoepisodio->assistido = intval('0');
         $novoepisodio->idTemporada = $this->dispatcher->getParam('id');
         $novoepisodio->save();
 
@@ -46,19 +47,6 @@ class EpisodioController extends ControllerBase
             return $this->response->redirect($this->request->getHTTPReferer());
         } else {
             return $this->response->redirect($this->request->getHTTPReferer());
-        }
-    }
-
-    public function editAction()
-    {
-        $serie = Episodio::findFirst($this->dispatcher->getParam('idepisodio'));
-        $serie->setnumero($this->request->getPost('numero'));
-        $serie->save();
-
-        if (!$serie){
-            echo "6";
-        } else {
-            return $this->response->redirect('/lista-episodios/serie/' . $this->dispatcher->getParam('idSerie'));
         }
     }
 }
